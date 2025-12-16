@@ -47,7 +47,6 @@ library(webshot2)
 ## <br><br>Contenidos
 
 
-
 **Esto es un texto en negrita**. _Esto es un texto en itálicas_. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. 
 
 
@@ -61,6 +60,9 @@ library(webshot2)
 ## <br><br>Tablas
 
 ```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+#| label: fig-A1
+#| tbl-cap: "Campaña de perforación"
+#| 
 DATA = data.table::fread("geoData/data.csv")
 TABLA = NGR::buildTable(
   DATA,
@@ -77,7 +79,14 @@ TABLA
 ## <br><br>Scatter Plot
 
 
+:::{.panel-tabset }
+#### FIGURA A1
+
 ```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+#| label: fig-B3
+#| fig-cap: "Scatter Plot de Easting[m] y Northing [m]"
+
+
 DATA = data.table::fread("geoData/scatter.csv")
 PLOT <- NGR::buildPlot(
     yAxis.label = TRUE,
@@ -93,6 +102,31 @@ PLOT <- NGR::buildPlot(
 )
 PLOT
 ```
+
+#### FIGURA A2
+
+
+```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+#| label: fig-B5
+#| fig-cap: "Scatter Plot de Easting[m] y Northing [m] en log-log"
+
+
+DATA = data.table::fread("geoData/scatter.csv")
+PLOT <- NGR::buildPlot(
+    yAxis.label = TRUE,
+    plot.height = 500,
+    legend.layout = "horizontal",
+    legend.show = TRUE,
+    xAxis.log = TRUE,
+    yAxis.log = TRUE,
+    xAxis.legend = "Easting [m]",
+    yAxis.legend = "Northing [m]",
+    group.legend = "Campaign",
+    data.points = DATA
+)
+PLOT
+```
+:::
 
 
 ## <br><br>Mapas
