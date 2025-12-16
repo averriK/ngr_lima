@@ -57,8 +57,6 @@ library(webshot2)
   - este es un sub-bullet
 
 
-## <br><br>Figura
-
 
 ## <br><br>Tablas
 
@@ -75,6 +73,26 @@ TABLA = NGR::buildTable(
 TABLA
 ```
 
+
+## <br><br>Scatter Plot
+
+
+```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+DATA = data.table::fread("geoData/scatter.csv")
+PLOT <- NGR::buildPlot(
+    yAxis.label = TRUE,
+    plot.height = 500,
+    legend.layout = "horizontal",
+    legend.show = TRUE,
+    xAxis.log = FALSE,
+    yAxis.log = FALSE,
+    xAxis.legend = "Easting [m]",
+    yAxis.legend = "Northing [m]",
+    group.legend = "Campaign",
+    data.points = DATA
+)
+PLOT
+```
 
 
 ## <br><br>Mapas
