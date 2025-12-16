@@ -1,0 +1,12 @@
+params:
+  ext: png
+  # Project / client metadata (shared between book and slides)
+  client: "SSR Mining – Seabee Gold Operation Inc."
+  client_short: "SSR/SGO"
+  location: "Laonil Lake, Saskatchewan, Canada"
+  site: "Seabee Gold Mine"
+  SRK: "SRK Consulting (Canada)"
+  latitude: 55.66679
+  longitude: -103.41482
+  SRK_short: "SRK"
+  URL: "https://arm2v4y.srk.ar/"

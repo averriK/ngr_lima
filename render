@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Minimal wrapper around `quarto render` that switches the active project
+# by updating the _quarto.yml symlink before delegating to Quarto.
+#
+# Usage examples:
+#   ./render index.qmd --to html --project yml/_book.yml
+#   ./render ppt.qmd   --to revealjs --project yml/_revealjs.yml
+#
+# If --project is omitted, the wrapper chooses:
+#   - yml/_revealjs.yml when --to revealjs or an input *.qmd ends with "ppt.qmd"
+#   - yml/_book.yml otherwise.
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
+
+args=("$@")
+PROJECT_YML=""
+INPUT=""
+FORMAT=""
+
+# First pass: find --project (our own flag), first *.qmd input, and --to value
+for ((i=0; i<${#args[@]}; i++)); do
+  arg="${args[$i]}"
+  case "$arg" in
+    --project)
+      if (( i + 1 < ${#args[@]} )); then
+        PROJECT_YML="${args[$((i+1))]}"
+      fi
+      ;;
+    --to)
+      if (( i + 1 < ${#args[@]} )); then
+        FORMAT="${args[$((i+1))]}"
+      fi
+      ;;
+    *.qmd)
+      if [[ -z "$INPUT" && "$arg" != -* ]]; then
+        INPUT="$arg"
+      fi
+      ;;
+  esac
+done
+
+# If caller didn't specify --project, choose based on format / input name
+if [[ -z "$PROJECT_YML" ]]; then
+  if [[ "$FORMAT" == "revealjs" || "$INPUT" == *"ppt.qmd" ]]; then
+    PROJECT_YML="yml/_revealjs.yml"
+  else
+    PROJECT_YML="yml/_book.yml"
+  fi
+fi
+
+if [[ ! -f "$PROJECT_YML" ]]; then
+  echo "ERROR: Project YAML not found: $PROJECT_YML" >&2
+  exit 1
+fi
+
+# Update _quarto.yml symlink
+rm -f _quarto.yml
+ln -s "$PROJECT_YML" _quarto.yml
+
+echo "[render] Using project: $PROJECT_YML" >&2
+
+# Second pass: strip our own --project flag before calling Quarto
+clean_args=()
+skip_next=false
+for ((i=0; i<${#args[@]}; i++)); do
+  if $skip_next; then
+    skip_next=false
+    continue
+  fi
+  if [[ "${args[$i]}" == "--project" ]]; then
+    skip_next=true
+    continue
+  fi
+  clean_args+=("${args[$i]}")
+
+done
+
+# If we are using the book project, drop any explicit *.qmd arguments so
+# that Quarto runs in project mode (renders the whole book). This means
+# commands like `./render index.qmd --to html --project yml/_book.yml`
+# behave like `quarto render --to html`.
+if [[ "$PROJECT_YML" == "yml/_book.yml" ]]; then
+  filtered=()
+  for arg in "${clean_args[@]}"; do
+    if [[ "$arg" == *.qmd ]]; then
+      continue
+    fi
+    filtered+=("$arg")
+  done
+  clean_args=("${filtered[@]}")
+fi
+
+# Delegate to Quarto with the remaining arguments
+exec quarto render "${clean_args[@]/\*/\*}"

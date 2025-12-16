@@ -1,0 +1,85 @@
+project:
+  type: default
+  output-dir: publish
+  resources:
+    - _pdfjs/**
+
+language: yml/_language-en.yml
+engine: knitr
+jupyter: python3
+
+# Bibliography: reuse main project bib
+bibliography: bib/references.bib
+link-citations: true
+colorlinks: true
+fontsize: 11pt
+citation: true
+appendix-cite-as: display
+google-scholar: false
+
+execute:
+  eval: true
+  echo: false
+  include: true
+  keep-md: false
+  freeze: false
+
+format:
+  revealjs:
+    output-file: ppt.html
+    theme: simple
+    margin: 0
+    center: false
+    reference-location: document
+    revealOptions:
+      width: 1920
+      height: 1080
+      autoScale: true
+
+    scrollable: true
+    controls: true
+    progress: true
+    keyboard: true
+    touch: true
+    hash: true
+    loop: false
+    history: false
+
+    transition: fade
+    transition-speed: default
+    background-transition: fade
+
+    fragments: true
+    fragment-in-url: true
+
+    highlight-style: nord
+    code-line-numbers: true
+    code-copy: false
+    code-overflow: scroll
+
+    slide-number: c/t
+    footer: ''
+
+    plugins:
+      - search
+      - chalkboard
+      - zoom
+      - menu
+    chalkboard: true
+    search: true
+    menu: true
+    zoom: true
+
+    title-slide: false
+    logo: styles/logo.png
+    css: styles/styles.css
+
+toc-title: Table of Contents
+
+crossref:
+  fig-title: Fig.
+  tbl-title: Table
+  eq-title: Equation
+  eq-prefix: eq.
+  tbl-prefix: tbl.
+  fig-prefix: fig.

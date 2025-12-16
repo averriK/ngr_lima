@@ -1,0 +1,45 @@
+---
+title: ""
+number-sections: false
+toc: false
+listing: false
+---
+
+```{r ,echo=FALSE,include=TRUE,eval=TRUE,message=FALSE, warning=FALSE}
+library(NGR)
+library(data.table)
+library(grid)
+library(png)
+library(knitr)
+library(highcharter)
+library(htmlwidgets)
+library(webshot2)
+```
+
+
+
+
+::: {.coverSlide}
+
+# Taller Presentaciones HTML (revealjs)<br>Lima, Diciembre 2025 {.cover-title}
+
+
+<p class="cover-subtitle">
+</p>
+<p class="cover-authors" markdown="1">
+  Author: Todos Ustedes<br>TItulo <a href="mailto:averri@srk.com.ar"><i class="fa fa-envelope"></i></a><br>
+</p>
+
+:::
+
+
+
+## <br>Contenidos
+
+- [ ] Slide 1
+- [ ] Slide 2
+- [ ] Slide 3
+
+
+
+

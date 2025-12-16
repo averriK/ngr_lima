@@ -1,0 +1,5 @@
+/*
+ * Font declarations are now handled via system-installed IBM Plex Sans
+ * and Bootstrap variables from yml/_brand.yml and styles/theme.scss.
+ * This file intentionally does not declare any webfonts.
+ */

@@ -1,0 +1,18 @@
+format:
+
+  #============================================================================
+  # 4. Custom "els-pdf" Format (Likely a user/plugin-defined format)
+  #============================================================================
+  els-pdf:
+    output-file: index.pdf
+    keep-tex: true
+    
+    # These parameters appear to be for a custom Elsevier-like PDF template 
+    # (not standard Quarto). Keep them if your environment/extension uses them:
+    journal:
+      formatting: preprint  # preprint, review, doubleblind
+      model: 3p            # 1p, 3p
+      layout: onecolumn    # onecolumn, twocolumn
+      cite-style: authoryear  # super, numbername, authoryear
+
+

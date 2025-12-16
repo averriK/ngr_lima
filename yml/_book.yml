@@ -1,0 +1,139 @@
+project:
+  type: book
+  execute-dir: project
+  output-dir: publish
+  resources:
+    - styles/**
+language: yml/_language-en.yml
+book:
+  language: en
+  chapters:
+    - index.qmd
+    - _index/C1.qmd
+    - _index/C2.qmd
+    - _index/C3.qmd
+    - _index/C4.qmd
+    - _index/C5.qmd
+    - _index/C6.qmd
+    - _index/references.qmd
+  appendices:
+    - _index/A1.qmd
+    - _index/A2.qmd
+    - _index/A3.qmd
+    - _index/A4.qmd
+    - _index/A5.qmd
+
+
+# Global settings
+engine: knitr
+jupyter: python3
+
+# Bibliography and citations
+bibliography: bib/references.bib
+link-citations: true
+citation: false
+appendix-cite-as: display
+google-scholar: false
+colorlinks: true
+fontsize: 12pt
+
+# Code execution defaults
+execute:
+  eval: true
+  echo: false
+  include: false
+  keep-md: false
+  freeze: false
+
+# Cross-references
+crossref:
+  fig-title: Fig.
+  tbl-title: Table
+  eq-title: Equation
+  eq-prefix: eq.
+  tbl-prefix: tbl.
+  fig-prefix: fig.
+
+# TOC
+toc-title: Table of Contents
+
+# ==============================================================================
+# FORMAT CONFIGURATIONS (book only: HTML, DOCX, PDF)
+# ==============================================================================
+
+format:
+  # HTML Format - For technical reports and documentation
+  html:
+    page-layout: article    # o article, o custom
+    # Use SRK brand palette (colors, logo metadata) plus the custom theme.
+    brand: yml/_brand.yml
+    theme: styles/theme.scss
+    logo: styles/logo.png
+    title-block-banner: true
+
+    # Global footer
+    include-after-body: yml/_footer.html
+
+    # Table of contents
+    toc: true
+    toc-depth: 4
+    toc-expand: true
+    toc-location: right
+
+    # Section numbering
+    number-sections: false
+    number-depth: 4
+
+    # Code styling
+    highlight-style: a11y
+    code-fold: true
+    code-summary: "Source"
+    code-line-numbers: true
+    code-copy: false
+    code-overflow: scroll
+
+    # Links and navigation
+    link-citations: true
+    link-external-newwindow: true
+    page-navigation: true
+    anchor-sections: true
+
+    # Resources and figures
+    embed-resources: false
+    self-contained: false
+    fig-width: 7
+    fig-height: 5
+
+    # Math rendering
+    math: true
+    math-output: mathjax
+
+  # Word (docx) Format - For client deliverables
+  docx:
+    reference-doc: styles/reference.docx
+    toc: true
+    toc-depth: 4
+    toc-title: "Table of Contents"
+    number-sections: true
+    number-depth: 4
+    highlight-style: github
+    fig-width: 7
+    fig-height: 5
+    fig-dpi: 300
+    fig-format: png
+    #df-print: kable
+
+  # PDF Format - For archival and print
+  pdf:
+    documentclass: report
+    geometry:
+      - margin=1in
+      - paperwidth=8.5in
+      - paperheight=11in
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    number-depth: 4
+    colorlinks: true
+    fig-pos: 'H'
+    keep-tex: false

@@ -1,0 +1,520 @@
+/*======================================================================
+  Professional PSHA Theme - Light Mode
+  Optimized for technical reporting and scientific documentation
+======================================================================*/
+
+/*----------------------------------------------------------------------
+  1. SCSS DEFAULTS - Variables and Bootstrap Overrides
+----------------------------------------------------------------------*/
+/*-- scss:defaults --*/
+
+// Typography is configured via _brand.yml; defaults here use only system fonts.
+
+// Color Palette - SRK Professional (keep in sync with styles/_brand.yml palette)
+$srk-blue: #003366 !default;          // primary
+$srk-light-blue: #0066CC !default;    // secondary
+$srk-accent: #FFB81C !default;        // legacy accent (yellow)
+$srk-header-orange: #F37021 !default; // header/footer, links, footnotes
+$srk-heading-blue: #0F4761 !default;  // dark heading blue
+$dark-gray: #2C3E50 !default;
+$medium-gray: #6C757D !default;
+$light-gray: #ECF0F1 !default;
+
+// Base Bootstrap-style variables (safe defaults; brand.yml may override)
+$body-bg: #FFFFFF !default;
+$body-color: #212529 !default;
+$border-color: #DEE2E6 !default;
+
+// Brand semantic colors
+$primary: $srk-blue !default;
+$secondary: $srk-light-blue !default;
+$success: #28A745 !default;
+$info: #17A2B8 !default;
+$warning: #FFC107 !default;
+$danger: #DC3545 !default;
+$light: $light-gray !default;
+$dark: $dark-gray !default;
+
+// Links
+// Define a default $link-color so this file compiles even if brand.yml is not applied yet.
+$link-color: $srk-light-blue !default;
+$link-hover-color: darken($link-color, 15%) !default;
+
+// Typography families (brand.yml may override sans/mono)
+// IMPORTANT: define the stack as a font-family *list*, not a single quoted string,
+// so the browser can choose each face correctly.
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace !default;
+
+// Typography (no serif corporate font; align serif with sans for consistency)
+$font-family-serif: $font-family-sans-serif !default;
+$font-size-root: 16px !default; // restore Quarto/Bootstrap default root font size
+$font-size-base: 1rem !default;
+$line-height-base: 1.6 !default;
+
+// Headings
+// Force headings to use the same sans family as body text so they visually
+// match an Arial/Helvetica style rather than a serif face.
+$headings-font-family: $font-family-sans-serif !default;
+$headings-font-weight: 700 !default;
+$headings-line-height: 1.3 !default;
+$headings-color: $primary !default;
+$h1-font-size: 1.67rem !default; // ≈ 20pt
+$h2-font-size: 1.17rem !default; // ≈ 14pt
+$h3-font-size: 1.00rem !default; // ≈ 12pt
+$h4-font-size: 1.25rem !default;
+$h5-font-size: 1.1rem !default;
+$h6-font-size: 1rem !default;
+
+// Spacing
+$spacer: 1rem !default;
+$paragraph-margin-bottom: 1.25rem !default;
+
+// Tables
+$table-cell-padding-y: 0.75rem !default;
+$table-cell-padding-x: 1rem !default;
+$table-striped-bg: rgba(0, 0, 0, 0.02) !default;
+$table-hover-bg: rgba($primary, 0.05) !default;
+$table-border-color: $border-color !default;
+$table-head-bg: $primary !default;
+$table-head-color: #FFFFFF !default;
+
+// Code blocks
+$code-bg: #F8F9FA !default;
+$code-color: #E83E8C !default;
+$code-block-bg: #F5F5F5 !default;
+$code-block-color: $body-color !default;
+$code-block-border-left: 4px solid $primary !default;
+$code-block-padding-left: 1rem !default;
+
+// Callouts
+$callout-border-width: 4px !default;
+$callout-border-radius: 0.25rem !default;
+
+// TOC
+$toc-color: $body-color !default;
+$toc-active-border: $primary !default;
+$toc-active-color: $primary !default;
+$tertiary-bg: #F8F9FA !default;
+
+// Navbar
+$navbar-dark-color: $body-color !default;
+$navbar-dark-hover-color: $link-color !default;
+$navbar-dark-active-color: $link-color !default;
+
+// Borders and radius
+$border-radius: 0.375rem !default;
+$border-width: 1px !default;
+
+/*----------------------------------------------------------------------
+  2. CSS RULES - Custom Styling
+----------------------------------------------------------------------*/
+/*-- scss:rules --*/
+
+// Base typography improvements (do not change base font-family; rely on theme)
+body {
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings with professional styling
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+}
+
+h1 {
+  border-bottom: 3px solid $primary;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  border-bottom: 2px solid lighten($primary, 40%);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  color: $secondary;
+}
+
+// Improved links
+a {
+  color: $link-color;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-hover-color;
+  }
+
+  &:focus {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// Professional tables
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  thead {
+    background-color: $table-head-bg;
+    color: $table-head-color;
+    font-weight: 600;
+    text-align: left;
+
+    th {
+      padding: $table-cell-padding-y $table-cell-padding-x;
+      border-bottom: 2px solid darken($primary, 10%);
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:nth-child(even) {
+        background-color: $table-striped-bg;
+      }
+
+      &:hover {
+        background-color: $table-hover-bg;
+      }
+
+      td {
+        padding: $table-cell-padding-y $table-cell-padding-x;
+        border-bottom: 1px solid $table-border-color;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+// Enhanced callouts
+.callout {
+  border-left-width: $callout-border-width;
+  border-radius: $callout-border-radius;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+
+  &.callout-note {
+    border-left-color: $info;
+    background-color: lighten($info, 45%);
+  }
+
+  &.callout-warning {
+    border-left-color: $warning;
+    background-color: lighten($warning, 40%);
+  }
+
+  &.callout-important {
+    border-left-color: $danger;
+    background-color: lighten($danger, 45%);
+  }
+
+  &.callout-tip {
+    border-left-color: $success;
+    background-color: lighten($success, 50%);
+  }
+
+  .callout-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Figures and captions
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  figcaption {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: $medium-gray;
+    margin-top: 0.75rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+}
+
+// Code blocks with professional styling
+pre {
+  margin: 1.5rem 0;
+}
+
+pre.sourceCode {
+  border-left: $code-block-border-left;
+  background-color: $code-block-bg;
+  padding: 1rem;
+  padding-left: $code-block-padding-left;
+  border-radius: $border-radius;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  code {
+    background-color: transparent;
+    padding: 0;
+    font-family: $font-family-monospace;
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+}
+
+code {
+  background-color: $code-bg;
+  color: $code-color;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  font-family: $font-family-monospace;
+}
+
+// Code copy button
+.code-copy-button {
+  background-color: $primary;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+
+// TOC styling
+#TOC {
+  border-left: 2px solid $primary;
+  padding-left: 1rem;
+
+  .nav-link {
+    color: $toc-color;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: $primary;
+      background-color: rgba($primary, 0.05);
+    }
+
+    &.active {
+      font-weight: 600;
+      color: $toc-active-color;
+      border-left: 3px solid $toc-active-border;
+      margin-left: -1rem;
+      padding-left: calc(1rem - 3px);
+    }
+  }
+}
+
+// Sidebar and SRK logo placement
+.sidebar-navigation {
+  background-color: $tertiary-bg;
+  border-right: 1px solid $border-color;
+
+  .nav-link {
+    color: $body-color;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($primary, 0.05);
+      color: $primary;
+    }
+
+    &.active {
+      background-color: rgba($primary, 0.1);
+      color: $primary;
+      font-weight: 600;
+      border-left: 3px solid $primary;
+    }
+  }
+}
+
+// SRK logo in the sidebar header (top-left of navigation)
+.sidebar-header .sidebar-logo-link {
+  display: block;
+  height: 52px; // slightly larger logo over TOC
+  margin: 0.5rem 0 0.75rem 0;
+  // Use a path relative to the project root so Quarto can copy the asset
+  background-image: url("styles/logo.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+// Footer styling
+.page-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 2px solid $srk-header-orange;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $medium-gray;
+
+  a {
+    color: $medium-gray;
+
+    &:hover {
+      color: $srk-header-orange;
+    }
+  }
+}
+
+// Layout adjustments for full-width HTML pages
+// (actual grid overrides now live in styles/layout.css to keep Bootstrap CSS clean).
+
+// NOTE: We intentionally avoid any global font-family override here so that
+// the base Quarto/bootstrap theme (simplex) controls typography.
+
+// Title block
+// Use Quarto's title-block banner structure when enabled. We keep the gradient
+// background and typography but do not inject the logo here because the SRK
+// logo file has a white background that clashes with the banner.
+.quarto-title-block .quarto-title-banner {
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+  color: white;
+
+  .quarto-title {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  h1.title {
+    color: white;
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .description {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+}
+
+// Search styling
+#quarto-search {
+  .form-control {
+    border-color: $border-color;
+    background-color: $body-bg;
+    color: $body-color;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+  }
+
+  .input-group-text {
+    background-color: $body-bg;
+    color: $body-color;
+    border-color: $border-color;
+  }
+}
+
+// Highcharts (interactive charts) - force consistent sans-serif fonts
+// regardless of any theme defaults coming from R/highcharter themes.
+.highcharts-root,
+.highcharts-title,
+.highcharts-subtitle,
+.highcharts-axis-labels text,
+.highcharts-axis-title text,
+.highcharts-legend-item text,
+.highcharts-data-label text,
+.highcharts-label text,
+.highcharts-tooltip text {
+  font-family: $font-family-sans-serif !important;
+}
+
+// Slightly reduce horizontal padding in the main body on large screens so
+// more of the central column is used for text without touching the grid layout.
+@media (min-width: 1200px) {
+  #quarto-content main.content {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  // Remove any default max-width cap on the main book column in "full" layout
+  // so it can use the entire available grid track.
+  .page-layout-full .column-body {
+    max-width: none;
+  }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+
+  table {
+    font-size: 0.875rem;
+  }
+
+  .quarto-title-block .quarto-title-banner {
+    padding: 2rem 0;
+  }
+}
+
+// Print styling
+@media print {
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    color: black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: black;
+  }
+
+  table, figure, img, pre {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .sidebar, .page-footer, #quarto-header, .nav-link {
+    display: none;
+  }
+}
