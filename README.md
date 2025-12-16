@@ -1,1 +1,1 @@
-# ngr_lima
+# Taller Presentaciones HTML Lima 2025
