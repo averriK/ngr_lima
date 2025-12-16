@@ -80,7 +80,8 @@ TABLA
 
 
 :::{.panel-tabset }
-#### FIGURA A1
+
+#### B3
 
 ```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
 #| label: fig-B3
@@ -103,7 +104,7 @@ PLOT <- NGR::buildPlot(
 PLOT
 ```
 
-#### FIGURA A2
+#### B5
 
 
 ```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
@@ -127,6 +128,19 @@ PLOT <- NGR::buildPlot(
 PLOT
 ```
 :::
+
+
+## <br>Aplicación Power-BI
+
+
+
+```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+#| label: fig-XXX23
+#| fig-cap: "Aplicacion que no funciona"
+
+NGR::showHTML("https://app.powerbi.com/view?r=eyJrIjoiZDEzZjg0N2MtOTYwZC00OTE5LWEyNWMtNzk3ZjNmMDg4MjkwIiwidCI6Ijk2YTM3OTA5LTljOTktNDAyNS05NWE1LTlmMDgwNWY1M2QyOCIsImMiOjR9", link_text = "Reporte Power-BI de prueba")
+```
+
 
 
 ## <br><br>Mapas
