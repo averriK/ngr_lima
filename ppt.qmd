@@ -34,12 +34,33 @@ library(webshot2)
 
 
 
-## <br>Contenidos
+## <br><br>Contenidos
 
+::: {.index}
 - [ ] Slide 1
 - [ ] Slide 2
 - [ ] Slide 3
 
+:::
+
+
+## <br><br>Contenidos
 
 
 
+**Esto es un texto en negrita**. _Esto es un texto en itálicas_. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. Esto es un texto. 
+
+
+* Eso es un bullet
+* otro bullet
+* otro bullet
+  - este es un sub-bullet
+
+
+## <br><br>Figura
+
+
+## <br><br>Tablas
+
+
+## <br><br>Mapas
