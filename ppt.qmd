@@ -62,5 +62,19 @@ library(webshot2)
 
 ## <br><br>Tablas
 
+```{r, echo=FALSE,include=TRUE,eval=TRUE,message=FALSE}
+DATA = data.table::fread("geoData/data.csv")
+TABLA = NGR::buildTable(
+  DATA,
+  library        = "flextable",
+  align.body     = "right",
+  font.size.body = 12,
+  font.size.header = 11) |>
+    flextable::set_table_properties(layout = "autofit")
+
+TABLA
+```
+
+
 
 ## <br><br>Mapas
